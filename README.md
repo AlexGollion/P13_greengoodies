@@ -22,3 +22,9 @@ Pour utiliser les commandes symfony
 ```bash
 docker-compose exec php /bin/bash
 ```
+
+Pour charger le sass
+
+```bash
+php bin/console sass:build --watch
+```

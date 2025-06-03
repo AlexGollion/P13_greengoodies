@@ -1,0 +1,28 @@
+* {
+    font-family: $font-family;
+}
+
+body {
+    margin: 0px;
+    background-color: $primary-background-color;
+}
+
+h1 {
+    font-size: 64px;
+    color: $title-color;
+}
+
+h2 {
+    font-size: 20px;
+    color: $title-color;
+}
+
+p {
+    color: $text-color;
+    font-size: small;
+}
+
+a {
+    text-decoration: none;
+    color: $text-link-color;
+}
