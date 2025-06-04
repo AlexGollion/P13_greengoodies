@@ -1,0 +1,25 @@
+form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+    label {
+        margin-bottom: 10px;
+        color: $text-color;
+        font-size: 14px;
+    }
+
+    input {
+        margin-bottom: 35px;
+        border: 1px solid $text-color;
+        background-color: $primary-background-color;
+        height: 50px;
+    }
+
+    button {
+        height: 60px;
+        color: $button-text-color;
+        background-color: $button-background-color;
+        border: none;
+    }
+}
