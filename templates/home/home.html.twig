@@ -28,11 +28,12 @@
     <h2>Nos Produits</h2>
     <div class="home-produits-liste">
         {% for product in products %}
-            <artcile class="home-card-product">
+            <article class="home-card-product">
                 <img src={{ product.photo }}>
                 <h3>{{ product.name }}</h3>
                 <p>{{ product.shortDescription }}</p>
-                <p>{{ product.price }}</p>
+                <p id="home-card-product-price">{{ product.price }}€</p>
+                <a href="#">Voir le produit</a>
             </article>
         {% endfor %}
     </div>
