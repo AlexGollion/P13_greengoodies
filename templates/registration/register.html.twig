@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <section class="registration">
+        <div class="registration-img">
+            <img src="{{ asset('images/Static/registration.png') }}" />
+        </div>
+
+        <div class="registration-div-form">
+            {{ form_errors(registrationForm) }}
+
+            {{ form_start(registrationForm) }}
+                <h1>Inscription</h1>
+                <p>Tous les champs sont obligatoire</p>
+                {{ form_row(registrationForm.lastName) }}
+                {{ form_row(registrationForm.firstName) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.plainPassword)}}
+                <div class="form-check-terms">
+                    {{ form_widget(registrationForm.agreeTerms) }}
+                    {{ form_label(registrationForm.agreeTerms) }}
+                </div>
+
+                <button type="submit" class="btn">S'inscrire</button>
+            {{ form_end(registrationForm) }}
+            <a href="{{ path('app_login') }}">Déjà un compte ? Se connecter</a>
+        </div>
+    </section>
+{% endblock %}

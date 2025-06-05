@@ -1,0 +1,31 @@
+.registration {
+    display: flex;
+    flex-direction: row;
+
+    .registration-img,
+    .registration-div-form {
+        width: 50%;
+    }
+
+    .registration-img {
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .registration-div-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 50px;
+
+        form {
+            margin-top: 5%;
+            h1 {
+                font-size: 20px;
+                margin-bottom: 50px;
+            }
+        }
+    }
+}
