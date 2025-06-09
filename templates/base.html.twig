@@ -14,10 +14,13 @@
     </head>
     <body>
         <header>
-            <div>
-                <p>GreenGoodies</p>
+            <div class="header-greenGoodies">
+                <a href="{{ path('app_main') }}">
+                    <p id="header-greenGoodies-logo">G</p>
+                    <p>Green Goodies</p>
+                </a>
             </div>
-            <div>
+            <div class="header-link">
                 {% if app.user %}
                     <a href="{{ path('app_logout') }}">Déconnexion</a>
 
