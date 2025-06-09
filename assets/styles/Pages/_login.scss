@@ -27,5 +27,12 @@
                 margin-bottom: 50px;
             }
         }
+
+        a {
+            margin-top: 50px;
+            font-size: 14px;
+            color: $text-color;
+            text-decoration: underline;
+        }
     }
 }
