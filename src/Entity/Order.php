@@ -32,6 +32,9 @@ class Order
     #[ORM\JoinColumn(nullable: false)]
     private ?User $userId = null;
 
+    #[ORM\Column]
+    private ?bool $validate = null;
+
     public function __construct()
     {
         $this->orderProducts = new ArrayCollection();
@@ -104,6 +107,18 @@ class Order
     public function setUserId(?User $userId): static
     {
         $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function isValidate(): ?bool
+    {
+        return $this->validate;
+    }
+
+    public function setValidate(bool $validate): static
+    {
+        $this->validate = $validate;
 
         return $this;
     }

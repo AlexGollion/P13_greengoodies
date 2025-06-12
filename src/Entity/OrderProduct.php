@@ -18,19 +18,16 @@ class OrderProduct
     #[ORM\Column]
     private ?int $quantity = null;
 
-    /**
-     * @var Collection<int, Product>
-     */
-    #[ORM\ManyToMany(targetEntity: Product::class)]
-    private Collection $productId;
-
     #[ORM\ManyToOne(inversedBy: 'orderProducts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Order $orderId = null;
 
+    #[ORM\ManyToOne(inversedBy: 'orderProducts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Product $productId = null;
+
     public function __construct()
     {
-        $this->productId = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -50,30 +47,6 @@ class OrderProduct
         return $this;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProductId(): Collection
-    {
-        return $this->productId;
-    }
-
-    public function addProductId(Product $productId): static
-    {
-        if (!$this->productId->contains($productId)) {
-            $this->productId->add($productId);
-        }
-
-        return $this;
-    }
-
-    public function removeProductId(Product $productId): static
-    {
-        $this->productId->removeElement($productId);
-
-        return $this;
-    }
-
     public function getOrderId(): ?Order
     {
         return $this->orderId;
@@ -82,6 +55,18 @@ class OrderProduct
     public function setOrderId(?Order $orderId): static
     {
         $this->orderId = $orderId;
+
+        return $this;
+    }
+
+    public function getProductId(): ?Product
+    {
+        return $this->productId;
+    }
+
+    public function setProductId(?Product $productId): static
+    {
+        $this->productId = $productId;
 
         return $this;
     }

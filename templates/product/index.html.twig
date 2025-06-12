@@ -16,7 +16,14 @@
             <p id="product-longDescription">{{ product.longDescription }}</p>
             
             {% if app.user %}
-                <a href="#">Ajouter au panier</a>
+                {{ form_errors(form) }}
+
+                {{ form_start(form, {'attr': {'class': 'product-form'}}) }}
+
+                {{ form_row(form.quantity) }}
+                
+                <button type="submit">Ajouter au panier</button>
+                {{ form_end(form) }}
             {% endif %}
         </div>
     </section>

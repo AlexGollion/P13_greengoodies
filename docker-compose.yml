@@ -19,6 +19,7 @@ services:
             - 8080:80
         volumes:
             - ./default.conf:/etc/apache2/sites-enabled/000-default.conf:ro
+            - ./xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
             - ./:/var/www
         depends_on:
             - database

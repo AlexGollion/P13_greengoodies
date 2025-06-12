@@ -33,7 +33,7 @@
                 <h3>{{ product.name }}</h3>
                 <p>{{ product.shortDescription }}</p>
                 <p id="home-card-product-price">{{ product.price }}€</p>
-                <a href="#">Voir le produit</a>
+                <a href="{{ path('app_product', {id:product.id}) }}">Voir le produit</a>
             </article>
         {% endfor %}
     </div>
