@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<section class="panier">
+    <h1>Panier</h1>
+    <a href="#" id="panier-vider">Vider le panier</a>
+    {% for product in products  %}
+        <div class="panier-product">
+            <img src="{{ asset('images/Product/Deodorant.png') }}" />
+            <div class="panier-product-text">
+                <h2>{{ product.name }}</h2>
+                <p>Quantié: {{ orderProducts[ loop.index - 1].quantity }}</p>
+                <p id="panier-product-text-price">{{ product.price }}€</p>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="panier-price">
+        <p>Frai de livraison offert</p>
+    </div>
+
+    <a href="#">Poursuivre les achats</a>
+    <a href="#">Valider la commande</a>
+
+</section>
+{% endblock %}

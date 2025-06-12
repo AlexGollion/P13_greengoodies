@@ -16,12 +16,13 @@ class OrderRepository extends ServiceEntityRepository
         parent::__construct($registry, Order::class);
     }
 
-    public function findUserOrder(int $userId)
+    public function findUserOrder(int $userId) : array
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.userId = :val')
+            ->andWhere('o.validate = 0')
             ->setParameter('val', $userId)
-            ->orderBy('o.id', 'DESC')
+            ->setMaxResults(1)
             ->getQuery()
             ->getResult()
         ;

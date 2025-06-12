@@ -1,0 +1,56 @@
+.panier {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $secondary-background-color;
+
+    .panier-product {
+        display: flex;
+        flex-direction: row;
+        background-color: $primary-background-color;
+        padding: 2%;
+
+        img {
+            width: 30%;
+            height: auto;
+        }
+
+        .panier-product-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 15%;
+
+            h2,
+            p {
+                font-size: 14px;
+            }
+
+            #panier-product-text-price {
+                font-size: 18px;
+                color: $title-color;
+            }
+        }
+    }
+
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 60px;
+        color: $button-text-color;
+        background-color: $button-background-color;
+        border: none;
+        margin-top: 25px;
+    }
+
+    #panier-vider {
+        display: block;
+        width: auto;
+        height: auto;
+        background-color: none;
+        color: $button-text-color;
+    }
+}

@@ -31,7 +31,7 @@ final class ProductController extends AbstractController
             $user = $this->security->getUser();
             $order = $this->orderRepository->findUserOrder($user->getId());
 
-            if ($order == null) {
+            if ($order == null && $form->get('quantity')->getData() !== 0) {
                 
                 $order = new Order();
                 $order->setUserId($user);
@@ -47,6 +47,8 @@ final class ProductController extends AbstractController
                 $this->entityManager->persist($order);
                 $this->entityManager->persist($orderProduct);
                 $this->entityManager->flush();
+
+                return $this->redirectToRoute('app_order');
             }
             /*if ($form->get('quantity')->getData() !== 0) {
                 $orderProduct = new OrderProduct();
@@ -54,7 +56,6 @@ final class ProductController extends AbstractController
                 $orderProduct->setProductId($product->getId());
                 
                 }*/
-            return $this->redirectToRoute('app_order');
         }
 
         return $this->render('product/index.html.twig', [

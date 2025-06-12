@@ -23,7 +23,7 @@
             <div class="header-link">
                 {% if app.user %}
                     <a href="#">Nos produits</a>
-                    <a href="#">Mon Panier</a>
+                    <a href="{{ path('app_order_panier') }}">Mon Panier</a>
                     <a href="#">Mon Compte</a>
                     <a href="{{ path('app_logout') }}">Déconnexion</a>
                 {% else %}
