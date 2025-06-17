@@ -16,11 +16,12 @@
         </div>
     {% endfor %}
     <div class="panier-price">
-        <p>Frai de livraison offert</p>
+        <p id="totalPrice">Total panier : <span>{{ price }}€</span></p>
+        <p id="frais-livraison">Frais de livraison : offert</p>
     </div>
 
-    <a href="#">Poursuivre les achats</a>
-    <a href="#">Valider la commande</a>
+    <a href="{{ path('app_main') }}">Poursuivre les achats</a>
+    <a href="{{ path('app_order_validate') }}">Valider la commande</a>
 
 </section>
 {% endblock %}

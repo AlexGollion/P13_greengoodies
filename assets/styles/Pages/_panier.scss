@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     background-color: $secondary-background-color;
+    padding-bottom: 5%;
 
     .panier-product {
         display: flex;
@@ -38,12 +39,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 50%;
-        height: 60px;
+        width: 25%;
+        height: 70px;
         color: $button-text-color;
         background-color: $button-background-color;
         border: none;
-        margin-top: 25px;
+        margin-top: 35px;
     }
 
     #panier-vider {
@@ -52,5 +53,38 @@
         height: auto;
         background-color: none;
         color: $button-text-color;
+    }
+
+    .panier-price {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: end;
+        margin-top: 15px;
+        width: 48%;
+        background-color: $background-color-panier-price;
+
+        p {
+            margin: 0px;
+        }
+
+        #totalPrice {
+            margin-top: 20px;
+            margin-right: 25px;
+            color: $title-color;
+            font-size: 14px;
+            font-weight: bold;
+
+            span {
+                font-size: 20px;
+            }
+        }
+
+        #frais-livraison {
+            font-size: 12px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+            margin-right: 45px;
+        }
     }
 }

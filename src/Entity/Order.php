@@ -45,9 +45,14 @@ class Order
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeImmutable
+    public function getDateImmutable(): ?\DateTimeImmutable
     {
         return $this->date;
+    }
+
+    public function getDate(): ?string
+    {
+        return $this->date->format('d/m/Y');
     }
 
     public function setDate(\DateTimeImmutable $date): static

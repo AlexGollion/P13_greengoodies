@@ -28,6 +28,18 @@ class OrderRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findUserOrderValidate(int $userId) : array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.userId = :val')
+            ->andWhere('o.validate = 1')
+            ->setParameter('val', $userId)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     //    /**
     //     * @return Order[] Returns an array of Order objects
     //     */

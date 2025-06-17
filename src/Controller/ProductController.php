@@ -43,24 +43,69 @@ final class ProductController extends AbstractController
                 $orderProduct->setProductId($product);
                 $orderProduct->setOrderId($order);
                 $order->addOrderProduct($orderProduct);
+                $this->totalPrice($order);
 
                 $this->entityManager->persist($order);
                 $this->entityManager->persist($orderProduct);
                 $this->entityManager->flush();
 
-                return $this->redirectToRoute('app_order');
+                return $this->redirectToRoute('app_order_panier');
             }
-            /*if ($form->get('quantity')->getData() !== 0) {
-                $orderProduct = new OrderProduct();
-                $orderProduct->setQuantity($form->get('quantity')->getData());
-                $orderProduct->setProductId($product->getId());
-                
-                }*/
+            else if ($order != null && $form->get('quantity')->getData() !== 0) {
+                $orderProductList = $order[0]->getOrderProducts();
+                $find = false;
+                $i = 0;
+                while ($i < $orderProductList->count() && !$find) {
+                    if ($orderProductList[$i]->getProductId()->getId() == $id && $orderProductList[$i]->getDeleteDate() == null) {
+                        $orderProductList[$i]->setQuantity($form->get('quantity')->getData());
+                        $find = true;
+                    }
+                    $i++;
+                }
+
+                if (!$find) {
+                    $orderProduct = new OrderProduct();
+                    $orderProduct->setQuantity($form->get('quantity')->getData());
+                    $orderProduct->setProductId($product);
+                    $orderProduct->setOrderId($order[0]);
+                    $order[0]->addOrderProduct($orderProduct);
+                    $this->entityManager->persist($orderProduct);
+                }
+                $this->totalPrice($order[0]);
+                $this->entityManager->flush();
+                return $this->redirectToRoute('app_order_panier');
+            }
+            else if ($order != null && $form->get('quantity')->getData() == 0) {
+                $orderProductList = $order[0]->getOrderProducts();
+                $find = false;
+                $i = 0;
+                while ($i < $orderProductList->count() && !$find) {
+                    if ($orderProductList[$i]->getProductId()->getId() == $id) {
+                        $date = new \DateTimeImmutable();
+                        $orderProductList[$i]->setDeleteDate($date);
+                        $find = true;
+                    }
+                    $i++;
+                }
+                $this->totalPrice($order[0]);
+                $this->entityManager->flush();
+                return $this->redirectToRoute('app_order_panier');
+            }
         }
 
         return $this->render('product/index.html.twig', [
             'product' => $product,
             'form' => $form
         ]);
+    }
+
+    private function totalPrice(Order $order) {
+        $total = 0;
+        foreach ($order->getOrderProducts() as $orderProduct) {
+            if ($orderProduct->getDeleteDate() == null) {
+                $total += $orderProduct->getProductId()->getPrice() * $orderProduct->getQuantity();
+            }
+        }
+        $order->setPrice($total);
     }
 }

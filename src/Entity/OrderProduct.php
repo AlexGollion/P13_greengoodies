@@ -26,6 +26,9 @@ class OrderProduct
     #[ORM\JoinColumn(nullable: false)]
     private ?Product $productId = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $deleteDate = null;
+
     public function __construct()
     {
     }
@@ -67,6 +70,18 @@ class OrderProduct
     public function setProductId(?Product $productId): static
     {
         $this->productId = $productId;
+
+        return $this;
+    }
+
+    public function getDeleteDate(): ?\DateTimeImmutable
+    {
+        return $this->deleteDate;
+    }
+
+    public function setDeleteDate(?\DateTimeImmutable $deleteDate): static
+    {
+        $this->deleteDate = $deleteDate;
 
         return $this;
     }

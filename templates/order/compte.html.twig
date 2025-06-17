@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<section class="compte">
+    <h1>Mon compte</h1>
+    <div class="compte-order">
+        <h2>Mes commandes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Date</th>
+                    <th>Prix</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders  %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.date }}</td>
+                        <td>{{ order.price }}€</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="compte-api">
+        <h2>Mon accès API</h2>
+    </div>
+    <div class="compte-delete">
+    
+    </div>
+</section>
+
+{% endblock %}
