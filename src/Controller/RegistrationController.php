@@ -40,4 +40,14 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form,
         ]);
     }
+
+    #[Route('/delete', name: 'app_register_delete')]
+    public function delete(Security $security, EntityManagerInterface $entityManager): Response
+    {
+        $user = $security->getUser();
+        $user->setDeleteDate(new \DateTimeImmutable());
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_logout');
+    }
 }

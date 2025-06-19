@@ -24,12 +24,12 @@
     </div>
 </section>
 
-<section class="home-produits">
-    <h2>Nos Produits</h2>
+<section class="home-produits" id="header-product-link">
+    <h2>NOS PRODUITS</h2>
     <div class="home-produits-liste">
         {% for product in products %}
             <article class="home-card-product">
-                <img src={{ product.photo }}>
+                <img src="{{ asset('images/Product/' ~ product.photo) }}">
                 <h3>{{ product.name }}</h3>
                 <p>{{ product.shortDescription }}</p>
                 <p id="home-card-product-price">{{ product.price }}€</p>

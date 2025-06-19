@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
@@ -34,6 +35,9 @@ class Order
 
     #[ORM\Column]
     private ?bool $validate = null;
+
+    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $deleteDate = null;
 
     public function __construct()
     {
@@ -124,6 +128,18 @@ class Order
     public function setValidate(bool $validate): static
     {
         $this->validate = $validate;
+
+        return $this;
+    }
+
+    public function getDeleteDate(): ?\DateTimeImmutable
+    {
+        return $this->deleteDate;
+    }
+
+    public function setDeleteDate(?\DateTimeImmutable $deleteDate): static
+    {
+        $this->deleteDate = $deleteDate;
 
         return $this;
     }

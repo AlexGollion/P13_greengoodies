@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -50,6 +51,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'userId')]
     private Collection $orders;
+
+    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $deleteDate = null;
 
     public function __construct()
     {
@@ -191,6 +195,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $order->setUserId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDeleteDate(): ?\DateTimeImmutable
+    {
+        return $this->deleteDate;
+    }
+
+    public function setDeleteDate(?\DateTimeImmutable $deleteDate): static
+    {
+        $this->deleteDate = $deleteDate;
 
         return $this;
     }

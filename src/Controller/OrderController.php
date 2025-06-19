@@ -88,6 +88,21 @@ final class OrderController extends AbstractController
             $this->entityManager->flush();
         }
         
-        return $this->redirect_to_route('app_order_compte');
+        return $this->redirectToRoute('app_order_compte');
+    }
+
+    #[Route('/order/delete', name: 'app_order_delete')]
+    public function deletePanier(): Response 
+    {
+        $user = $this->security->getUser();
+        $order = $this->orderRepository->findUserOrder($user->getId());
+        if ($order != null) {
+            $order[0]->setDeleteDate(new \DateTimeImmutable());
+            foreach($order[0]->getOrderProducts() as $orderProduct) {
+                $orderProduct->setDeleteDate(new \DateTimeImmutable());
+            }
+            $this->entityManager->flush();
+        }
+        return $this->redirectToRoute('app_order_panier');
     }
 }

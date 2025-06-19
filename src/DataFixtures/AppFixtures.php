@@ -23,6 +23,8 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
+        
+        $photo = $this->getImagesFiles();
 
         for ($i = 0; $i < 5; $i++) {
             $user = new User();
@@ -40,12 +42,24 @@ class AppFixtures extends Fixture
             $product->setName($faker->word . ' ' . $faker->word);
             $product->setShortDescription($faker->sentence);
             $product->setLongDescription($faker->paragraph);
-            $product->setPhoto($faker->imageUrl);
+            $product->setPhoto($faker->randomElement($photo));
             $product->setPrice($faker->randomFloat(2, 0, 100));
 
             $manager->persist($product);
         }
 
         $manager->flush();
+    }
+
+    private function getImagesFiles(): array
+    {
+        $imgDir = __DIR__ . '/../../assets/images/Product';
+        $filesTemp = scandir($imgDir);
+
+        $files = array_filter($filesTemp, function ($file) {
+            return $file !== '.' && $file !== '..';
+        });
+
+        return $files;
     }
 }

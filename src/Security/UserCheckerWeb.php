@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusExce
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class UserChecker implements UserCheckerInterface
+class UserCheckerWeb implements UserCheckerInterface
 {
     public function checkPreAuth(UserInterface $user): void
     {
@@ -15,8 +15,8 @@ class UserChecker implements UserCheckerInterface
             return;
         }
 
-        if (!$user->isApiAccess()) {
-            throw new CustomUserMessageAccountStatusException("Accès à l'API pas activé");
+        if ($user->getDeleteDate() != null) {
+            throw new CustomUserMessageAccountStatusException("Votre compte à eté supprimé");
         }
     }
 

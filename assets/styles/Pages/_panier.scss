@@ -47,12 +47,20 @@
         margin-top: 35px;
     }
 
-    #panier-vider {
-        display: block;
-        width: auto;
-        height: auto;
-        background-color: none;
-        color: $button-text-color;
+    .panier-vider {
+        display: flex;
+        align-items: start;
+        width: 48%;
+        margin-bottom: 15px;
+
+        a {
+            margin-left: 5px;
+            width: auto;
+            height: auto;
+            background-color: $secondary-background-color;
+            color: $text-color;
+            font-size: 14px;
+        }
     }
 
     .panier-price {

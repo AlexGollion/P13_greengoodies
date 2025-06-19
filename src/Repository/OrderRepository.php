@@ -21,6 +21,7 @@ class OrderRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('o')
             ->andWhere('o.userId = :val')
             ->andWhere('o.validate = 0')
+            ->andWhere('o.deleteDate IS NULL')
             ->setParameter('val', $userId)
             ->setMaxResults(1)
             ->getQuery()
