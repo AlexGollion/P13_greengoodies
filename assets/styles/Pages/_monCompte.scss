@@ -1,0 +1,50 @@
+.compte {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .compte-order,
+    .compte-api,
+    .compte-delete {
+        background-color: $background-color-panier-price;
+        margin-top: 25px;
+        padding: 3%;
+        width: 47%;
+    }
+
+    .compte-order {
+        h2 {
+            font-size: 14px;
+        }
+    }
+
+    .compte-api,
+    .compte-delete {
+        a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 70px;
+            color: $button-text-color;
+            background-color: $button-background-color;
+            border: none;
+            margin-top: 35px;
+        }
+    }
+
+    .compte-api {
+        h2 {
+            font-size: 14px;
+        }
+    }
+
+    .compte-delete {
+        margin-bottom: 5%;
+    }
+}

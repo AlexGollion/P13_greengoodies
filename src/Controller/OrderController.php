@@ -72,4 +72,22 @@ final class OrderController extends AbstractController
             'orders' => $orders
         ]);
     }
+
+    #[Route('/order/activate', name: 'app_order_activate')]
+    public function activate(): Response
+    {
+        $user = $this->security->getUser();
+        
+        if(!$user->isApiAccess()) {
+            $user->setApiAccess(true);
+            $this->entityManager->flush();
+        }
+        else
+        {
+            $user->setApiAccess(false);
+            $this->entityManager->flush();
+        }
+        
+        return $this->redirect_to_route('app_order_compte');
+    }
 }

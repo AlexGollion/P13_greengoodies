@@ -27,9 +27,14 @@
     </div>
     <div class="compte-api">
         <h2>Mon accès API</h2>
+        {% if app.user.apiAccess %}
+            <a href="{{ path('app_order_activate') }}">Désactiver mon accès API</a>
+        {% else %}
+            <a href="{{ path('app_order_activate') }}">Activer mon accès API</a>
+        {% endif %}
     </div>
     <div class="compte-delete">
-    
+        <a href="#">Supprimer mon compte</a>
     </div>
 </section>
 

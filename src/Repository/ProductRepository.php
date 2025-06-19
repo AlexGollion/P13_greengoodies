@@ -16,6 +16,15 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    public function findAllApi(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p.id, p.name, p.price, p.photo, p.shortDescription, p.longDescription')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     //    /**
     //     * @return Product[] Returns an array of Product objects
     //     */

@@ -34,7 +34,6 @@ class OrderRepository extends ServiceEntityRepository
             ->andWhere('o.userId = :val')
             ->andWhere('o.validate = 1')
             ->setParameter('val', $userId)
-            ->setMaxResults(1)
             ->getQuery()
             ->getResult()
         ;
