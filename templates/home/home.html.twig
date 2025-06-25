@@ -20,7 +20,7 @@
     </div>
 
     <div class="hero-header-img">
-        <img src="{{ asset('images/Static/hero-header.png') }}" />
+        <img src="{{ asset('images/Static/hero-header.webp') }}" alt="Image de bienvenue"/>
     </div>
 </section>
 
@@ -29,7 +29,7 @@
     <div class="home-produits-liste">
         {% for product in products %}
             <article class="home-card-product">
-                <img src="{{ asset('images/Product/' ~ product.photo) }}">
+                <img src="{{ asset('images/Product/' ~ product.photo) }}" alt="{{product.name}}">
                 <h3>{{ product.name }}</h3>
                 <p>{{ product.shortDescription }}</p>
                 <p id="home-card-product-price">{{ product.price }}€</p>
@@ -50,13 +50,13 @@
         </p>
     </div>
     <div class="home-convictions-img">
-        <img src="{{ asset('images/Static/home-convictions.png') }}" />
+        <img src="{{ asset('images/Static/home-convictions.webp') }}" alt="Plante"/>
     </div>
 </section>
 
 <section class="home-valeurs">
     <div class="home-valeurs-img">
-        <img src="{{ asset('images/Static/home-valeurs.png') }}" />
+        <img src="{{ asset('images/Static/home-valeurs.webp') }}" alt="Sac poubelle vert"/>
     </div>
 
     <div class="home-valeurs-text">

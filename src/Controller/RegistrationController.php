@@ -46,6 +46,12 @@ class RegistrationController extends AbstractController
     {
         $user = $security->getUser();
         $user->setDeleteDate(new \DateTimeImmutable());
+        $orders = $user->getOrders();
+        foreach($orders as $order) {
+            if ($order->getDeleteDate() == null) {
+                $order->setDeleteDate(new \DateTimeImmutable());
+            }
+        }
         $entityManager->flush();
 
         return $this->redirectToRoute('app_logout');

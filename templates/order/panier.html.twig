@@ -9,7 +9,7 @@
         </div>
     {% for product in products  %}
         <div class="panier-product">
-            <img src="{{ asset('images/Product/Deodorant.png') }}" />
+            <img src="{{ asset('images/Product/' ~ product.photo) }}" alt="{{product.name}}"/>
             <div class="panier-product-text">
                 <h2>{{ product.name }}</h2>
                 <p>Quantié: {{ orderProducts[ loop.index - 1].quantity }}</p>

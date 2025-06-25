@@ -24,7 +24,11 @@ final class ProductController extends AbstractController
     public function displayProduct($id, Request $request): Response
     {
         $product = $this->productRepository->find($id);
-        $form = $this->createForm(OrderProductForm::class);
+        $dataDisplay = $this->getUserProductInfo($id);
+        $form = $this->createForm(OrderProductForm::class, null, [
+            'quantity' => $dataDisplay[0],
+        ]);
+        
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -95,7 +99,8 @@ final class ProductController extends AbstractController
 
         return $this->render('product/index.html.twig', [
             'product' => $product,
-            'form' => $form
+            'form' => $form,
+            'libelle' => $dataDisplay[1]
         ]);
     }
 
@@ -107,5 +112,26 @@ final class ProductController extends AbstractController
             }
         }
         $order->setPrice($total);
+    }
+
+    private function getUserProductInfo($productId) : array
+    {
+        $user = $this->security->getUser();
+        $result = array();
+        if ($user != null) {
+            $order = $this->orderRepository->findUserOrder($user->getId());
+            if ($order != null) {
+                $orderProducts = $order[0]->getOrderProducts();
+                foreach ($orderProducts as $orderProduct) {
+                    if ($orderProduct->getProductId()->getId() == $productId) {
+                        array_push($result, $orderProduct->getQuantity());
+                        array_push($result, "Mettre à jour");
+                    }
+                }
+            }      
+        }
+        array_push($result, 0);
+        array_push($result, "Ajouter au panier");
+        return $result;
     }
 }

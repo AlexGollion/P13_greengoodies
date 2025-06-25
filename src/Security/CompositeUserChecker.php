@@ -6,26 +6,26 @@ use App\Entity\User;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-
-class UserCheckerApi implements UserCheckerInterface
+class CompositeUserChecker implements UserCheckerInterface
 {
+    private array $userCheckers;
+
+    public function __construct(UserCheckerInterface ...$userCheckers)
+    {
+        $this->userCheckers = $userCheckers;
+    }
     public function checkPreAuth(UserInterface $user): void
     {
-        if (!$user instanceof User) {
-            return;
-        }
-
-        if (!$user->isApiAccess()) {
-            throw new CustomUserMessageAccountStatusException("Accès à l'API pas activé", [], 403);
+        foreach ($this->userCheckers as $userChecker) {
+            $userChecker->checkPreAuth($user);
         }
     }
 
     public function checkPostAuth(UserInterface $user): void
     {
-        if (!$user instanceof User) {
-            return;
+        foreach ($this->userCheckers as $userChecker) {
+            $userChecker->checkPostAuth($user);
         }
     }
 }

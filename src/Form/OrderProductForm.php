@@ -21,7 +21,7 @@ class OrderProductForm extends AbstractType
                 'label_attr' => [
                     'for' => 'orderProduct_quantity',
                 ],
-                'data' => 0,
+                'data' => $options['quantity'],
                 'attr' => [
                     'min' => 0,
                     'max' => 100,
@@ -37,6 +37,7 @@ class OrderProductForm extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => OrderProduct::class,
+            'quantity' => 0
         ]);
     }
 }

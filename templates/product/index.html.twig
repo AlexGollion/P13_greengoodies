@@ -6,7 +6,7 @@
 
     <section class="product">
         <div class="product-img">
-            <img src="{{ asset('images/Product/Deodorant.png') }}" />
+            <img src="{{ asset('images/Product/' ~ product.photo) }}" alt="{{product.name}}"/>
         </div>
         
         <div class="product-text">
@@ -22,7 +22,7 @@
 
                 {{ form_row(form.quantity) }}
                 
-                <button type="submit">Ajouter au panier</button>
+                <button type="submit">{{ libelle }}</button>
                 {{ form_end(form) }}
             {% endif %}
         </div>
