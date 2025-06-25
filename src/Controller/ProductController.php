@@ -141,7 +141,7 @@ final class ProductController extends AbstractController
                 $orderProducts = $order[0]->getOrderProducts();
                 foreach ($orderProducts as $orderProduct) {
                     // Si le produit est dans le panier, on ajoute la quantité et le libelle dans un array
-                    if ($orderProduct->getProductId()->getId() == $productId) {
+                    if ($orderProduct->getProductId()->getId() == $productId && $orderProduct->getDeleteDate() == null) {
                         array_push($result, $orderProduct->getQuantity());
                         array_push($result, "Mettre à jour");
                     }
