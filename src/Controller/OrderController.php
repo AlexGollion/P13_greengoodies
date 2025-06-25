@@ -22,6 +22,7 @@ final class OrderController extends AbstractController
     {
         $user = $this->security->getUser();
         $order = $this->orderRepository->findUserOrder($user->getId());
+        // Si le panier n'est pas vide, on récupère tout les produits du panier
         if ($order != null) {
             $orderProducts = $order[0]->getOrderProducts();
             $products = array();
@@ -34,6 +35,7 @@ final class OrderController extends AbstractController
             }
             $price = $order[0]->getPrice();
         }      
+        // Si le panier est vide
         else 
         {
             $products = array();
@@ -50,6 +52,9 @@ final class OrderController extends AbstractController
         ]);
     }
 
+    /**
+    * Route pour valider la commande
+    **/
     #[Route('/order/validate', name: 'app_order_validate')]
     public function validateOrder(): Response 
     {
@@ -97,7 +102,9 @@ final class OrderController extends AbstractController
         $user = $this->security->getUser();
         $order = $this->orderRepository->findUserOrder($user->getId());
         if ($order != null) {
+            // On supprime le panier
             $order[0]->setDeleteDate(new \DateTimeImmutable());
+            // On supprime les orderProducts
             foreach($order[0]->getOrderProducts() as $orderProduct) {
                 $orderProduct->setDeleteDate(new \DateTimeImmutable());
             }

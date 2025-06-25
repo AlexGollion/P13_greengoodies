@@ -41,11 +41,17 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+    /**
+    * Route pour supprimer un utilisateur 
+    **/ 
     #[Route('/delete', name: 'app_register_delete')]
     public function delete(Security $security, EntityManagerInterface $entityManager): Response
     {
+        // On récupère l'utilisateur et on le supprime (ajout de la date de supprssion)
         $user = $security->getUser();
         $user->setDeleteDate(new \DateTimeImmutable());
+
+        // On récupère les commandes de l'utilisateur et on les supprime
         $orders = $user->getOrders();
         foreach($orders as $order) {
             if ($order->getDeleteDate() == null) {
