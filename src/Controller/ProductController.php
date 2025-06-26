@@ -144,6 +144,7 @@ final class ProductController extends AbstractController
                     if ($orderProduct->getProductId()->getId() == $productId && $orderProduct->getDeleteDate() == null) {
                         array_push($result, $orderProduct->getQuantity());
                         array_push($result, "Mettre à jour");
+                        return $result;
                     }
                 }
             }      
